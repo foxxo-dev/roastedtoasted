@@ -1,6 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,800;1,800&display=swap');
 @import './variables.css';
 
+body {
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+}
+
 main {
   display: flex;
   flex-direction: column;
