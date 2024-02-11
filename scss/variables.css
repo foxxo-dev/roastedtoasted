@@ -35,3 +35,14 @@ button {
   border-radius: 0.25rem;
   cursor: pointer;
 }
+
+label {
+  color: var(--accent, #8363d4);
+}
+
+input {
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  border: 0;
+  background: var(--secondary, #8bbfdf);
+}
