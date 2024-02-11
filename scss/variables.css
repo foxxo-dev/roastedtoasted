@@ -1,0 +1,37 @@
+:root {
+  --text: #1a1407;
+  --background: #fcf9f4;
+  --primary: #fed790;
+  --secondary: #8bbfdf;
+  --accent: #8363d4;
+}
+
+html,
+body {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  height: 100dvh;
+  margin: 0;
+  font-family: 'Jetbrains Mono', 'Inter', 'Roboto', monospace;
+  background: var(--background, white);
+  color: var(--text, black);
+  font-weight: 800;
+}
+
+p {
+  opacity: 0.8;
+}
+
+h1 {
+  padding: 0;
+  margin: 0;
+}
+
+button {
+  all: unset;
+  background: var(--primary, beige);
+  padding: 0.6rem 2rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}

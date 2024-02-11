@@ -1,0 +1,14 @@
+body[data-is-in-development='true'] {
+  &::after {
+    content: 'In Development';
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: red;
+    color: white;
+    padding: 0.5rem;
+    padding-inline: 5rem;
+    font-size: 1.5rem;
+    transform: rotate(45deg) translate(28%, -5%);
+  }
+}
