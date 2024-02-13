@@ -12,6 +12,8 @@
     "vite": "^5.1.0"
   },
   "dependencies": {
+    "firebase": "^10.8.0",
+    "firestore": "^1.1.6",
     "sass": "^1.70.0",
     "scss": "^0.2.4"
   }

@@ -6,6 +6,12 @@
   --accent: #8363d4;
 }
 
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
 html,
 body {
   display: grid;
@@ -45,4 +51,27 @@ input {
   border-radius: 0.25rem;
   border: 0;
   background: var(--secondary, #8bbfdf);
+  font-family: 'Jetbrains Mono', 'Inter', 'Roboto', monospace;
+}
+
+select {
+  all: unset;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  background: var(--primary, #8bbfdf);
+  position: relative;
+  position: relative; /* śEnsure select is positioned relative */
+  padding-right: 1.8rem; /* Adjust for the arrow space */
+  appearance: none; /* Remove default arrow */
+  -webkit-appearance: none; /* For older Safari */
+  -moz-appearance: none; /* For older Firefox */
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10" width="10" height="10" style="border-radius: 0.125rem;"><polygon points="0,0 10,0 5,5"/></svg>'); /* Arrow SVG */
+  background-repeat: no-repeat;
+  background-position: 98% 60%; /* Adjust the position */
+  padding-right: 1.5em; /* Adjust for the arrow space */
+  font-family: 'Jetbrains Mono', 'Inter', 'Roboto', monospace;
+}
+
+option:disabled {
+  opacity: .8;
 }
