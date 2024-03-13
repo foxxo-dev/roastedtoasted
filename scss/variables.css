@@ -75,3 +75,15 @@ select {
 option:disabled {
   opacity: 0.8;
 }
+
+option,
+input,
+select {
+  position: relative;
+}
+
+input:disabled,
+select:disabled,
+option:disabled {
+   
+}
