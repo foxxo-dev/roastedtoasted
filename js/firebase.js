@@ -1,7 +1,13 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, getDocs, addDoc } from 'firebase/firestore';
-import { deleteDoc } from 'firebase/firestore';
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  addDoc,
+  doc,
+  updateDoc
+} from 'firebase/firestore';
 
 var users = [];
 
@@ -17,60 +23,74 @@ const firebaseConfig = {
   messagingSenderId: '221087713786',
   appId: '1:221087713786:web:ed06bd647da83ea5d0bc43'
 };
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
 const db = getFirestore(app);
+// Your web app's Firebase configuration
 
-export async function getUsers() {
-  const querySnapshot = await getDocs(collection(db, 'users'));
-  querySnapshot.forEach((doc) => {
-    const data = doc.data();
-    console.log(data);
-    users.push({
-      isFree: data.status == 'awaiting' ? true : false,
-      pair: data.pair,
-      nick: data.nick
-    });
-  });
-  console.log(users);
-  return users;
-}
+// Initialize Firebase
 
-export async function addUserToDB(name) {
-  console.log(name);
-  const querySnapshot = await getDocs(collection(db, 'users'));
-  let userExists = false;
-  querySnapshot.forEach((doc) => {
-    const data = doc.data();
-    if (data.nick === name) {
-      userExists = true;
-      console.log('User already exists:', data);
-      alert('User already exists');
-    }
-  });
-  if (!userExists) {
-    const obj = {
-      nick: name,
-      status: 'awaiting',
-      pair: null
-    };
-    console.log(obj);
-    const docRef = await addDoc(collection(db, 'users'), obj);
-    console.log('User added to database with ID: ', docRef.id);
+// Function to go online
+export async function addUserToDB(nick) {
+  const usersRef = collection(db, 'users');
+  const querySnapshot = await getDocs(usersRef);
+  const users = querySnapshot.docs.map((doc) => doc.data());
+  const user = users.find((user) => user.nick === nick);
+  if (user) {
+    console.log(`User ${nick} already exists.`);
+  } else {
+    await addDoc(collection(db, 'users'), { nick: nick });
+    console.log(`User ${nick} added to database.`);
   }
 }
 
-export async function removeSelfFromDB(name) {
-  console.log(name);
-  const querySnapshot = await getDocs(collection(db, 'users'));
-  querySnapshot.forEach((doc) => {
-    const data = doc.data();
-    if (data.nick === name) {
-      console.log('User found:', data);
-      deleteDoc(doc.ref);
-    }
-  });
-  console.log('User removed from database');
+// Function to send chat request
+export async function sendChatRequest(senderNick, receiverNick) {
+  const usersRef = collection(db, 'users');
+  const querySnapshot = await getDocs(usersRef);
+  const users = querySnapshot.docs.map((doc) => doc.data());
+
+  const sender = users.find((user) => user.nick === senderNick);
+  const receiver = users.find((user) => user.nick === receiverNick);
+
+  if (sender && receiver) {
+    // Add chat request to receiver's requests collection
+    await addDoc(collection(db, 'users', receiver.id, 'requests'), {
+      sender: senderNick,
+      timestamp: new Date().toISOString()
+    });
+    console.log(`Chat request sent from ${senderNick} to ${receiverNick}.`);
+  } else {
+    console.log(`User ${senderNick} or ${receiverNick} not found.`);
+  }
+}
+
+export async function checkIfRecievedRequest(nick) {
+  const usersRef = collection(db, 'users');
+  const querySnapshot = await getDocs(usersRef);
+  const users = querySnapshot.docs.map((doc) => doc.data());
+
+  const user = users.find((user) => user.nick === nick);
+  if (user) {
+    const requestsRef = collection(db, 'users', user.id, 'requests');
+    if (!requestsRef) return null;
+    const querySnapshot = await getDocs(requestsRef);
+    const requests = querySnapshot.docs.map((doc) => doc.data());
+    console.log(requests);
+    return requests;
+  } else {
+    console.log(`User ${nick} not found.`);
+    return null;
+  }
+}
+
+// Function to get all user nicks
+export async function getAllUserNicks() {
+  const usersRef = collection(db, 'users');
+  const querySnapshot = await getDocs(usersRef);
+  const users = querySnapshot.docs.map((doc) => doc.data());
+  const nicks = users.map((user) => user.nick);
+  console.log(nicks);
+  return nicks;
 }

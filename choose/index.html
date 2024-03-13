@@ -8,24 +8,51 @@
     <link rel="stylesheet" href="../scss/indev.scss" />
   </head>
   <body data-is-in-development="true">
+    <div id="loadingPopup">
+      <div id="loadingPopupContent">
+        <h1>Loading...</h1>
+        <p>Awaiting Response</p>
+      </div>
+    </div>
     <main>
       <h1>🔥ROASTED TOASTED🍞</h1>
-      <form>
-        <label for="username">Nick</label>
-        <input
-          type="text"
-          id="nick"
-          name="username"
-          placeholder="TheBigOctopusOfTheWorld"
-        />
-        <label for="enemy">Choose Your Enemy</label>
-        <select id="enemy" name="enemy" disabled>
-          <option value="placeholder" disabled selected>--LOADING--</option>
-        </select>
-        <button type="submit">Roast!</button>
-      </form>
-      <a id="leaveLink">Leave</a>
+      <div id="pages">
+        <div id="page_enter_nickname">
+          <form>
+            <label for="username">Nick</label>
+            <input
+              type="text"
+              id="nick"
+              name="username"
+              placeholder="TheBigOctopusOfTheWorld"
+            />
+            <button type="submit" id="startGame">Continue</button>
+          </form>
+        </div>
+
+        <div id="page_choose" data-active="true">
+          <div class="welcome_message">
+            <span class="top">
+              Hi
+              <span id="username">🐙 TRĄBKOTKOT</span>!</span
+            >
+            <span class="bottom"
+              >Challenge an opponent or wait to be challenged!</span
+            >
+          </div>
+          <div class="opponents_online_container">
+            <span>Opponents online:</span>
+            <div id="opponents_online">
+              <div id="opponent_FriedSquidBoi" class="oponent">
+                <span class="oponent_name">🔥TRĄBKOTKOT🍞</span>
+                <button class="challenge_opponent">🔥TRĄBKOTKOT🍞</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
+    <a id="leaveLink">🚪leave</a>
   </body>
   <script type="module" src="main.js"></script>
 </html>
