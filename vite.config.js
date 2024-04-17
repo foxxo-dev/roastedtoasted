@@ -1,6 +1,4 @@
 import { resolve } from 'path';
-import pkg from 'fs-extra';
-const { copy } = pkg;
 import { defineConfig } from 'vite';
 
 export default defineConfig({
