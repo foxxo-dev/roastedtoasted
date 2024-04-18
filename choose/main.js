@@ -24,6 +24,9 @@ var is_run = false;
 window.addEventListener('load', () => {
   if (is_run) return;
   is_run = true;
+  alert(
+    'Please do notice that this version is not finished, you currently cannot enter the chat system to roast. This version is in development. Expect the first release in about 2-4 weeks.',
+  );
   document.getElementById('startGame').addEventListener('click', (e) => {
     e.preventDefault();
 
