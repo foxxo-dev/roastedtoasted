@@ -22,7 +22,7 @@ var current_status = 'nick';
 
 var is_run = false;
 
-generateTermsPopup()
+// generateTermsPopup()
 
 window.addEventListener('load', () => {
   if (is_run) return;
