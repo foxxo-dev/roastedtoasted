@@ -13,10 +13,7 @@ export async function generateOpponentList(containerDOM) {
   const container = document.getElementById(containerDOM);
   container.innerHTML = '';
   users.forEach((user) => {
-    if (
-      user.status === 'awaiting' &&
-      user.nick !== document.body.dataset.nick
-    ) {
+    if (user.status === 'awaiting' || user.status === 'challenged') {
       container.appendChild(createOpponentCard(user));
     }
   });
@@ -31,10 +28,20 @@ function createOpponentCard(user) {
   const button = document.createElement('button');
   button.className = 'challenge_opponent';
   button.innerText = 'Challenge';
-  button.addEventListener(
-    'click',
-    async () => await challengeOpponent(user.nick),
-  );
+  if (user.nick !== document.body.dataset.nick) {
+    button.addEventListener(
+      'click',
+      async () => await challengeOpponent(user.nick),
+    );
+  } else {
+    button.addEventListener('click', () => {
+      alert(
+        'You tried to outsmart the non-outsmartable! Imagine being that dumb.',
+      );
+      alert('Alerting all of your friends about being so dumb.');
+    });
+  }
+
   card.appendChild(name);
   card.appendChild(button);
   return card;
