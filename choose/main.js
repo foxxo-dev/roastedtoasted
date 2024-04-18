@@ -7,6 +7,7 @@ import {
   checkIfChallenged,
 } from '../js/firebase.js';
 import { generateOpponentList } from '../js/createOpponentsList.js';
+import { generateTermsPopup } from '../js/termsPopupGenerator.js';
 
 const loading = document.getElementById('loadingPopup');
 
@@ -24,6 +25,7 @@ var is_run = false;
 window.addEventListener('load', () => {
   if (is_run) return;
   is_run = true;
+  document.body.appendChild(generateTermsPopup());
   alert(
     'Please do notice that this version is not finished, you currently cannot enter the chat system to roast. This version is in development. Expect the first release in about 2-4 weeks.',
   );
