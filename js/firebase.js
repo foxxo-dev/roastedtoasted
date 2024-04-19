@@ -98,7 +98,7 @@ export async function removeUser(nick) {
 
 // Challenge Opponent
 
-export async function challengeOpponent(nick) {
+export async function challengeOpponent(nick, buttonDOM) {
   console.log('got challanged');
   const users_snapshot = await getDocs(collection(db, 'online'));
   users_snapshot.forEach(async (doc) => {
@@ -108,8 +108,28 @@ export async function challengeOpponent(nick) {
         target: nick,
         from: getSelf(),
       });
+      buttonDOM.innerText = 'Sent!';
+      buttonDOM.disabled = true;
+      buttonDOM.removeEventListener('click', challengeOpponent);
+      buttonDOM.style.backgroundColor = 'gray';
+      buttonDOM.style.color = 'white';
     }
   });
+
+  setInterval(async () => {
+    const users_snapshot = await getDocs(collection(db, 'challenges'));
+    users_snapshot.forEach(async (doc) => {
+      console.log('Checking if challenged', doc.data());
+      if (doc.data().from === getSelf()) {
+        window.location.href =
+          '../chat/index.html?nick=' +
+          getSelf() +
+          '&opponent=' +
+          nick +
+          '&starting=false';
+      }
+    });
+  }, 1000);
 }
 
 export async function checkIfChallenged() {
@@ -133,6 +153,53 @@ export async function acceptChallenge(nick) {
     status: 'accepted',
     from: getSelf(),
   });
+
+  await removeUser(document.body.dataset.nick);
+
+  await addDoc(collection(db, 'challenges'), {
+    nick: document.body.dataset.nick,
+    emoji: '',
+    status: 'accepted',
+    from: nick,
+  });
   document.getElementById('challenges').innerHTML = '';
-  document.getElementById('loading').style.opacity = 1;
+  document.getElementById('loadingPopup').style.opacity = 1;
+  window.location.href =
+    '../chat/index.html?nick=' +
+    document.body.dataset.nick +
+    '&opponent=' +
+    nick +
+    '&starting=true';
+}
+
+export async function getPlayer(nick) {
+  const query_snapshot = await getDocs(collection(db, 'challenges'));
+  let user = null;
+  query_snapshot.forEach(async (doc) => {
+    console.log(doc.data());
+    if (doc.data().nick === nick) {
+      user = doc.data();
+    }
+  });
+
+  return user;
+}
+
+export async function sendMsg_firebase(nick, msg) {
+  // Do a for each loop to get yourself as a document
+
+  const userDoc = doc(db, 'challenges', nick);
+
+  
+
+}
+
+export async function checkForMessages(opponent_nick) {
+  const userDoc = doc(db, 'challenges', opponent_nick);
+  const userDocSnap = await getDocs(userDoc);
+  let messages = [];
+  userDocSnap.forEach((doc) => {
+    messages = doc.data().messages;
+  });
+  return messages;
 }

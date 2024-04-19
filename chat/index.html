@@ -1,0 +1,53 @@
+<!-- Chat Page -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Roasting | 🔥ROASTED TOASTED🍞</title>
+    <link rel="stylesheet" href="../scss/chat.scss" />
+    <link rel="stylesheet" href="../scss/home.scss" />
+  </head>
+  <body data-nick="loading">
+    <div id="loadingPopup">
+      <div id="loadingPopupContent">
+        <h1>How to play:</h1>
+        <p>
+          You are given 10 questions to use up, after both people use up 10
+          questions, your score is going to be calculated, by checking how many
+          common roasts you use. <br />
+          <br />
+          Example: Yo mama roasts = 2 points
+        </p>
+      </div>
+    </div>
+    <main>
+      <h1>🔥ROASTED TOASTED🍞</h1>
+      <div id="chat">
+        <div id="chatMessages">
+          <div class="message_them" id="opponent_msg">
+            <div class="msg">
+              <span class="message_name" id="first_msg_name_them">- -------</span>
+              <span class="message_text">Hello!</span>
+            </div>
+          </div>
+          <div class="message_me" id="my_msg">
+            <div class="msg">
+              <span class="message_name" id="first_msg_name_us">- -------</span>
+              <span class="message_text">Let's Go Roast!</span>
+            </div>
+          </div>
+        </div>
+        <div id="chatForm">
+          <span class="msg_remaning" id="remaining">-- messages remaining</span>
+          <input
+            type="text"
+            id="chatInput"
+            placeholder="Type your message here..." />
+          <button id="send_btn">Send</button>
+        </d>
+      </div>
+    </main>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>

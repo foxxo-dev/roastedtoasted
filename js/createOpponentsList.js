@@ -31,7 +31,7 @@ function createOpponentCard(user) {
   if (user.nick !== document.body.dataset.nick) {
     button.addEventListener(
       'click',
-      async () => await challengeOpponent(user.nick),
+      async () => await challengeOpponent(user.nick, button),
     );
   } else {
     button.addEventListener('click', () => {
@@ -40,6 +40,10 @@ function createOpponentCard(user) {
       );
       alert('Alerting all of your friends about being so dumb.');
     });
+
+    setInterval(() => {
+      button.innerText = 'Challenge';
+    }, 5000);
   }
 
   card.appendChild(name);
