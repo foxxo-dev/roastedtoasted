@@ -8,7 +8,7 @@ export function updateDropdown(data, dropdown) {
   data.forEach((element) => {
     console.log('Adding element to dropdown:', element);
     const option = document.createElement('option');
-    option.innerHTML = element.nick;
+    option.innerHTML = element;
     dropdown.appendChild(option);
   });
 }

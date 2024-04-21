@@ -1,0 +1,18 @@
+@import './variables';
+
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 4px;
+  background-color: var(--background, white);
+  border: 1px solid var(--background, white);
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+  background-color: var(--secondary, #8bbfdf);
+}

@@ -1,0 +1,24 @@
+.terms-popup {
+  aspect-ratio: 3/4;
+  -webkit-box-shadow: 0px 0px 0px 100vw rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0px 0px 0px 100vw rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 0px 0px 100vw rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 100vh;
+  left: 100vw;
+  transform: translate(calc(-50% - 50vw), calc(-50% - 50vh));
+  background: var(--bg, white);
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 2rem;
+  height: 35rem;
+  border-radius: 0.75rem;
+}
+
+.terms-popup button {
+  width: 80%;
+  text-align: center;
+}
