@@ -4,7 +4,11 @@ import { generateEmoji } from '../js/emoji-generator';
 
 var { nick, opponent, starting } = getURLParams(window.location.href);
 
-document.getElementById("loadingPopup").style.opacity = 0;
+document.getElementById('loadingPopup').style.opacity = 0;
+
+starting == 'true'
+  ? (document.getElementById('info-text').innerHTML = 'You start the battle.')
+  : (document.getElementById('info-text').innerHTML = 'Opponent starts the battle.');
 
 var user_emoji = '🗿';
 var enemy_emoji = '🦽';
@@ -83,7 +87,8 @@ const gotMessage = (msg) => {
   message.render();
 
   // scroll div chatmessages to the bottom
-  document.getElementById('chatMessages').scrollTop = document.getElementById('chatMessages').scrollHeight;
+  document.getElementById('chatMessages').scrollTop =
+    document.getElementById('chatMessages').scrollHeight;
 
   userTurn();
 };
@@ -112,8 +117,9 @@ const sending = async () => {
   document.getElementById('messageInput').value = '';
   console.log('Message Sent!');
 
-    // scroll div chatmessages to the bottom
-    document.getElementById('chatMessages').scrollTop = document.getElementById('chatMessages').scrollHeight;
+  // scroll div chatmessages to the bottom
+  document.getElementById('chatMessages').scrollTop =
+    document.getElementById('chatMessages').scrollHeight;
 
   enemyTurn();
 };
