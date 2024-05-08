@@ -41,6 +41,8 @@ function createOpponentCard(user) {
       alert('Alerting all of your friends about being so dumb.');
     });
 
+    button.innerText = 'You';
+
     setInterval(() => {
       button.innerText = 'Challenge';
     }, 5000);

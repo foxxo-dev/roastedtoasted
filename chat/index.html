@@ -1,15 +1,15 @@
-<!-- Chat Page -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Roasting | 🔥ROASTED TOASTED🍞</title>
+    <link rel="icon" href="../assets/ico.png" />
     <link rel="stylesheet" href="../scss/chat.scss" />
     <link rel="stylesheet" href="../scss/home.scss" />
   </head>
   <body data-nick="loading">
-    <div id="loadingPopup">
+    <div id="loadingPopup" style="transition-delay: 0; opacity: 0;">
       <div id="loadingPopupContent">
         <h1>How to play:</h1>
         <p>
@@ -25,27 +25,14 @@
       <h1>🔥ROASTED TOASTED🍞</h1>
       <div id="chat">
         <div id="chatMessages">
-          <div class="message_them" id="opponent_msg">
-            <div class="msg">
-              <span class="message_name" id="first_msg_name_them">- -------</span>
-              <span class="message_text">Hello!</span>
-            </div>
-          </div>
-          <div class="message_me" id="my_msg">
-            <div class="msg">
-              <span class="message_name" id="first_msg_name_us">- -------</span>
-              <span class="message_text">Let's Go Roast!</span>
-            </div>
-          </div>
         </div>
         <div id="chatForm">
           <span class="msg_remaning" id="remaining">-- messages remaining</span>
           <input
-            type="text"
-            id="chatInput"
+            id="messageInput"
             placeholder="Type your message here..." />
-          <button id="send_btn">Send</button>
-        </d>
+          <button id="sendButton">Send</button>
+        </div>
       </div>
     </main>
     <script type="module" src="./main.js"></script>

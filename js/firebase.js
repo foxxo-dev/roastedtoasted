@@ -8,12 +8,15 @@ import {
   doc,
   updateDoc,
   deleteDoc,
+  query,
+  where,
 } from 'firebase/firestore';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/firestore';
+
 import { generateChallengedDOM } from './generateChallengedDOM.js';
 var users = [];
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -185,21 +188,36 @@ export async function getPlayer(nick) {
   return user;
 }
 
-export async function sendMsg_firebase(nick, msg) {
-  // Do a for each loop to get yourself as a document
-
-  const userDoc = doc(db, 'challenges', nick);
-
-  
-
+export async function sendMsg_firebase(
+  nick_slef,
+  nick_opponent,
+  msg,
+  timestamp,
+  seen,
+) {
+  const messageCollections = collection(db, 'messages');
+  await addDoc(messageCollections, {
+    from: nick_slef,
+    to: nick_opponent,
+    message: msg,
+    timestamp: timestamp,
+    seen: seen,
+  });
 }
 
-export async function checkForMessages(opponent_nick) {
-  const userDoc = doc(db, 'challenges', opponent_nick);
-  const userDocSnap = await getDocs(userDoc);
-  let messages = [];
-  userDocSnap.forEach((doc) => {
-    messages = doc.data().messages;
+export async function getMsgs_firebase(nick_self) {
+  const q = query(
+    collection(db, 'messages'),
+    where('to', '==', nick_self),
+    where('seen', '==', false),
+  );
+
+  const query_snapshot = await getDocs(q);
+  const messages = [];
+  query_snapshot.forEach((doc) => {
+    messages.push(doc.data());
+    deleteDoc(doc.ref);
   });
+
   return messages;
 }

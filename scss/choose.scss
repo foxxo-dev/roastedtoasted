@@ -20,6 +20,7 @@ body {
   gap: 0.5rem;
   opacity: 0;
   transition: opacity 0.3s ease;
+  transition-delay: -0.3s;
   pointer-events: none;
 }
 

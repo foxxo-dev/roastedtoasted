@@ -21,8 +21,8 @@ var nick = default_nick;
 var current_status = 'nick';
 
 var is_run = false;
-
-// generateTermsPopup()
+//  (mr nimo should i add this)
+generateTermsPopup()
 
 window.addEventListener('load', () => {
   if (is_run) return;

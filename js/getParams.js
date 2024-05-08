@@ -12,5 +12,6 @@ export function getURLParams(url) {
       value.replace(/\+/g, ' ').replace(/%20/g, ' '),
     );
   });
+  console.log(params);
   return params;
 }

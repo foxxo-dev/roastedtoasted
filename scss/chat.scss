@@ -32,7 +32,7 @@ main {
   place-items: center;
   background: var(--bg, white);
   transition: opacity 0.2s ease;
-  // transition-delay: 10s;
+  transition-delay: 10s;
   pointer-events: none;
   #loadingPopupContent {
     max-width: 50pc;
@@ -53,6 +53,9 @@ main {
   input {
     width: 100%;
   }
+  button#sendButton {
+    white-space: nowrap;
+  }
 }
 
 #chat {
@@ -61,30 +64,77 @@ main {
     display: flex;
     width: 80vw;
     gap: 2rem;
-    & * {
-      //   outline: 2px solid red;
-      height: 100%;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-    }
-    .message_me {
-      align-items: flex-end;
-      text-align: right;
-    }
+    flex-direction: column;
+    gap: 2rem;
+    overflow-y: auto;
+    padding-inline: 0.5rem;
+    margin-bottom: 1rem;
+
+    scroll-behavior: smooth;
+
     .msg {
-      display: flex;
-      flex-direction: column;
-      height: min-content;
+      display: grid;
+      grid-template-columns: 1rem auto;
+      grid-template-rows: 1rem auto;
+      column-gap: 0.5rem;
+      row-gap: 0.25rem;
+
       max-width: 80%;
-      width: fit-content;
+      padding: 0.5rem;
+      border-radius: 0.25rem;
+
+      position: relative;
+
+      .message_emoji {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
       .message_name {
         font-weight: 500;
         font-size: 0.8rem;
+        opacity: 0.6;
+
+        display: flex;
+        justify-content: row-start;
+        align-items: center;
       }
       .message_text {
         font-size: 1.2rem;
+
+        grid-area: auto / auto / auto / span 2;
       }
+    }
+    .msg.my_msg {
+      background: var(--primary, #fed790);
+      place-self: flex-end;
+    }
+    .msg.opponent_msg {
+      background: var(--secondary, #8bbfdf);
+      place-self: flex-start;
+    }
+    .msg::after {
+      content: '';
+      height: 0;
+      width: 0;
+
+      position: absolute;
+      bottom: -1.5rem;
+      
+      border-width: 1rem;
+      border-style: solid;
+      border-radius: 0 0 1rem 1rem / 0 0 0.5rem 0.5rem;
+    }
+
+    .msg.my_msg::after {
+      border-color: var(--primary, #fed790) var(--primary, #fed790) transparent transparent;
+      right: auto;
+      right: 0;
+    }
+    .msg.opponent_msg::after {
+      border-color: var(--secondary, #8bbfdf) transparent transparent var(--secondary, #8bbfdf);
+      right: auto;
+      left: 0;
     }
   }
 }
