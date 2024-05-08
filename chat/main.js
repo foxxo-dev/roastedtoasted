@@ -4,6 +4,8 @@ import { generateEmoji } from '../js/emoji-generator';
 
 var { nick, opponent, starting } = getURLParams(window.location.href);
 
+document.getElementById("loadingPopup").style.opacity = 0;
+
 var user_emoji = '🗿';
 var enemy_emoji = '🦽';
 
