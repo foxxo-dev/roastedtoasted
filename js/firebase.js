@@ -124,7 +124,7 @@ export async function challengeOpponent(nick, buttonDOM) {
     users_snapshot.forEach(async (doc) => {
       console.log('Checking if challenged', doc.data());
       if (doc.data().from === getSelf()) {
-        window.location.href =
+        location.href =
           '../chat/index.html?nick=' +
           getSelf() +
           '&opponent=' +
@@ -152,7 +152,7 @@ export async function acceptChallenge(nick) {
   // Add the user to the challenges collection
   await addDoc(collection(db, 'challenges'), {
     nick: nick,
-    emoji: '',
+    isMyTurn: false,
     status: 'accepted',
     from: getSelf(),
   });
@@ -161,7 +161,7 @@ export async function acceptChallenge(nick) {
 
   await addDoc(collection(db, 'challenges'), {
     nick: document.body.dataset.nick,
-    emoji: '',
+    isMyTurn: true,
     status: 'accepted',
     from: nick,
   });
@@ -188,20 +188,20 @@ export async function getPlayer(nick) {
   return user;
 }
 
-export async function sendMsg_firebase(
-  nick_slef,
-  nick_opponent,
-  msg,
-  timestamp,
-  seen,
-) {
-  const messageCollections = collection(db, 'messages');
-  await addDoc(messageCollections, {
-    from: nick_slef,
-    to: nick_opponent,
-    message: msg,
-    timestamp: timestamp,
-    seen: seen,
+export async function sendMsg_firebase(nick, msg) {
+  // Do a for each loop to get yourself as a document, and the nick element is not the id but is a field
+  const users = await getUsers();
+
+  const user = users.find((user) => user.nick === nick);
+
+  updateDoc(doc(db, 'challenges', nick), {
+    messages: [...user.messages, msg],
+    isMyTurn: false,
+  });
+
+  const opponent = users.find((user) => user.from === getSelf());
+  updateDoc(doc(db, 'challenges', opponent.nick), {
+    isMyTurn: true,
   });
 }
 
