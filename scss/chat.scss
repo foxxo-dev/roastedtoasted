@@ -61,6 +61,25 @@ main {
   }
   button#sendButton {
     white-space: nowrap;
+    background-color: var(--primary, #fed790);
+
+    transform-origin: center;
+    
+    transition: all 0.5s ease;
+
+    &:not(disabled) {
+      
+    }
+    &:disabled {
+      background-color: rgb(173, 168, 165);
+      color: white;
+      cursor: not-allowed;
+    }
+    &:disabled:hover {
+      animation: shake 150ms linear;
+      
+    }
+    animation: none;
   }
 }
 
@@ -126,21 +145,35 @@ main {
 
       position: absolute;
       bottom: -1.5rem;
-      
+
       border-width: 1rem;
       border-style: solid;
       border-radius: 0 0 1rem 1rem / 0 0 0.5rem 0.5rem;
     }
 
     .msg.my_msg::after {
-      border-color: var(--primary, #fed790) var(--primary, #fed790) transparent transparent;
+      border-color: var(--primary, #fed790) var(--primary, #fed790) transparent
+        transparent;
       right: auto;
       right: 0;
     }
     .msg.opponent_msg::after {
-      border-color: var(--secondary, #8bbfdf) transparent transparent var(--secondary, #8bbfdf);
+      border-color: var(--secondary, #8bbfdf) transparent transparent
+        var(--secondary, #8bbfdf);
       right: auto;
       left: 0;
     }
+  }
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(1px, 0) rotate(-2deg);
+  }
+  50% {
+    transform: translate(-1px, 0) rotate(2deg);
+  }
+  100% {
+    transform: translate(0, 0) rotate(0deg);
   }
 }

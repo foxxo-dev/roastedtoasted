@@ -22,6 +22,7 @@ var current_status = 'nick';
 
 var is_run = false;
 //  (mr nimo should i add this)
+// ( dear beloved  mr foxxxo, i dunno lol )
 generateTermsPopup()
 
 window.addEventListener('load', () => {
