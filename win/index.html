@@ -45,11 +45,7 @@
       </h2>
       <p>
         Share this page with your friends, or copy this link <br />
-        <code
-          ><a href="https://roasted-toasted.foxxo.studio/win/index.html"
-            >https://roasted-toasted.foxxo.studio/wi...</a
-          ></code
-        >
+        <code><a href="">https://roasted-toasted.foxxo.studio/wi...</a></code>
       </p>
 
       <button>Play Again!</button>
@@ -68,6 +64,22 @@
       'opponentName',
       opponentName,
     );
+
+    function copy() {
+      const el = document.createElement('textarea');
+      el.value =
+        'https://roasted-toasted.foxxo.studio/win/index.html?isShared=true&opponentName=' +
+        opponentName;
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand('copy');
+      document.body.removeChild(el);
+      alert('Copied')
+      window.open(
+        'https://roasted-toasted.foxxo.studio/win/index.html?isShared=true&opponentName=' +
+          opponentName,
+      );
+    }
 
     document.querySelector('h2').innerHTML =
       'Congrats! <br /> \
