@@ -5,7 +5,7 @@ var { nick, opponent, starting } = getURLParams(window.location.href);
 
 // document.getElementById('loadingPopup').style.opacity = 0;
 
-messages_log = new Array();
+var messages_log = new Array();
 
 starting == 'true'
   ? (document.getElementById('info-text').innerHTML = 'You start the battle.')
