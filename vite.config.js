@@ -9,6 +9,7 @@ export default defineConfig({
         choose: resolve(__dirname, 'choose/index.html'),
         chat: resolve(__dirname, 'chat/index.html'),
         terms: resolve(__dirname, 'terms/index.html'),
+        win: resolve(__dirname, 'win/index.html'),
         404: resolve(__dirname, '404/index.html'),
       },
     },
