@@ -64,11 +64,10 @@ main {
     background-color: var(--primary, #fed790);
 
     transform-origin: center;
-    
+
     transition: all 0.5s ease;
 
     &:not(disabled) {
-      
     }
     &:disabled {
       background-color: rgb(173, 168, 165);
@@ -77,13 +76,13 @@ main {
     }
     &:disabled:hover {
       animation: shake 150ms linear;
-      
     }
     animation: none;
   }
 }
 
-#chat {
+#chat,
+#gameOver_chat {
   #chatMessages {
     height: 80vh;
     display: flex;

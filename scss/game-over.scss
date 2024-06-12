@@ -4,6 +4,11 @@
   z-index: 10000;
   inset: 0;
   padding: 1rem;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
 }
 
 #gameOver_canvas {
@@ -12,6 +17,8 @@
   width: 50rem;
 
   margin-inline: auto;
+  outline: 5px solid var(--accent, purple);
+  padding: 1rem;
 
   #gameOver_header {
     width: 100%;
@@ -28,29 +35,29 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 1rem;
+    gap: 2rem;
     margin-top: 1rem;
+    position: relative;
+
+    --vs_size: 5rem;
 
     .card {
       font-size: 4rem;
       overflow: hidden;
       position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
       .card_background {
         position: absolute;
-        right: -4rem;
-        bottom: -3.5rem;
         font-size: 12rem;
+        transform: scaleX(-1);
+        opacity: 0.5;
       }
 
       .card_text {
         position: absolute;
-        left: 0.5rem;
-        bottom: 0rem;
-        text-align: right;
-      }
-      .vs {
-        position: absolute;
-        color: purple;
       }
     }
 
@@ -58,9 +65,8 @@
       background: var(--secondary, blue);
 
       .card_background {
-        left: -22rem;
+        left: -2rem;
         bottom: -3.5rem;
-        transform: scaleX(-1);
       }
       .card_text {
         right: 0.5rem;
@@ -68,16 +74,44 @@
         text-align: right;
       }
       .vs {
+        color: white;
+        right: calc(-1 * var(--vs_size, 10rem) - 1rem);
+      }
+    }
+
+    .card:nth-child(3) {
+      background: var(--primary, yellow);
+
+      .card_background {
         position: absolute;
-        color: black;
+        right: -2rem;
+        bottom: -3.5rem;
+      }
+
+      .card_text {
+        left: 0.5rem;
+        bottom: 0rem;
+        text-align: right;
+      }
+      .vs {
+        color: white;
+        left: calc(-1 * var(--vs_size, 10rem) - 1rem);
       }
     }
 
     .vs {
       position: absolute;
-      color: green;
-      font-size: 20rem;
-      line-height: 10rem;
+
+      letter-spacing: -0.25rem;
+
+      font-size: calc(1.5 * var(--vs_size, 10rem));
+      line-height: calc(1 * var(--vs_size, 10rem));
+      height: var(--vs_size, 10rem);
+      width: calc(2 * var(--vs_size, 10rem));
+    }
+
+    > .vs {
+      color: var(--accent, purple);
     }
   }
 
@@ -87,7 +121,35 @@
       background: var(--accent, purple);
       color: white;
       padding-inline: 1rem;
-      clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+      height: 3rem;
+      position: relative;
+      --width: 0.5rem;
+
+      &::after,
+      &::before {
+        content: ' ';
+        display: inline-block;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      &::after {
+        border-width: 2rem var(--width, 1rem) 2rem var(--width, 1rem);
+        border-color: var(--accent, purple) transparent transparent
+          var(--accent, purple);
+        right: calc(-2 * var(--width, 1rem));
+      }
+
+      &::before {
+        border-width: 2rem var(--width, 1rem) 2rem var(--width, 1rem);
+        border-color: transparent var(--accent, purple) var(--accent, purple)
+          transparent;
+        left: calc(-2 * var(--width, 1rem));
+      }
     }
   }
 }

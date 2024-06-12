@@ -11,15 +11,17 @@
     <link rel="stylesheet" href="../scss/game-over.scss" />
   </head>
   <body data-nick="loading">
-    <!-- <div id="loadingPopup">
-      <div id="loadingPopupContent" style="opacity: 0; transition-delay: 0s">
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <div id="loadingPopup" style="display: none">
+      <div id="loadingPopupContent" style="opacity: 1; transition-delay: 5s">
         <h1>How to play:</h1>
         <p>
-          You are given 5 minutes to use up, after both people use up 5 minutes,
-          you lose if you do not write your questions in time.
+          Each person has 30 seconds to roast the other person. The person that
+          does not send their message in the 30 second time-frame given, will
+          lose the roast battle.
         </p>
       </div>
-    </div> -->
+    </div>
     <main>
       <h1>🔥ROASTED TOASTED🍞</h1>
       <p id="info-text">You start</p>
@@ -34,31 +36,31 @@
           <button id="sendButton">Send</button>
         </div>
       </div>
-      <!-- <div id="gameOver">
+      <div id="gameOver">
         <h1 id="gameOver_Message">Yay! You Won!</h1>
         <br />
         <h2>
           You <span id="gameOver_wonlost">won</span> against
-          <span id="gameOver_enemy">your mom</span> !
+          <span id="gameOver_enemy">your mom</span>!
         </h2>
 
         <button>Play Again!</button>
 
-        <button>Save Chat History</button>
+        <button id="save_chat_history">Save Chat History</button>
 
         <div id="gameOver_canvas" style="display: flex">
           <div id="gameOver_header">
             <h1>🔥ROASTED TOASTED🍞</h1>
             <div id="gameOver_cards">
               <div id="main_cards">
-                <span class="vs">vs</span>
+                <span class="vs">VS</span>
                 <div class="card">
-                  <span class="vs">vs</span>
+                  <span class="vs">VS</span>
                   <span class="card_background">🦊</span>
                   <span class="card_text">Foxxo</span>
                 </div>
                 <div class="card">
-                  <span class="vs">vs</span>
+                  <span class="vs">VS</span>
                   <span class="card_background">🦝</span>
                   <span class="card_text">Nimo</span>
                 </div>
@@ -67,12 +69,10 @@
             <h2>Total Messages: <span id="total_msg">00</span></h2>
             <h2>Game Time: <span id="total_msg">00:00</span></h2>
           </div>
-          <div id="gameOver_chat">
-            
-          </div>
+          <div id="gameOver_chat"></div>
         </div>
-      </div> 
-    </main> -->
+      </div>
+    </main>
     <script type="module" src="./main.js"></script>
   </body>
 </html>
