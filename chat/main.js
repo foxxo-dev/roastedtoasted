@@ -19,7 +19,6 @@ let player_turn_time = 30000;
 
 var total_messages = 0;
 
-
 document.getElementById('gameOver_enemy').innerText = opponent;
 
 let enemyWin = () => {
@@ -33,7 +32,7 @@ let enemyWin = () => {
       'Uh oh, try again next time!';
 
     document.getElementById('gameOver_enemy').innerText = opponent;
-    document.getElementById('total_msgs').innerText = total_messages
+    document.getElementById('total_msg').innerText = total_messages
       .toString()
       .padStart(2, '0');
 
