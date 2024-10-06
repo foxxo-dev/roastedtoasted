@@ -17,7 +17,6 @@ import 'firebase/compat/firestore';
 import { generateChallengedDOM } from './generateChallengedDOM.js';
 var users = [];
 
-
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: 'AIzaSyA_tQZ9xzTXrXqRCgtnX-artCy9-cJoqxM',
@@ -124,7 +123,9 @@ export async function challengeOpponent(nick, buttonDOM) {
     users_snapshot.forEach(async (doc) => {
       console.log('Checking if challenged', doc.data());
       if (doc.data().from === getSelf()) {
-        location.href =
+        // remove the challenges document
+        await deleteDoc(doc.ref);
+        window.location.href =
           '../chat/index.html?nick=' +
           getSelf() +
           '&opponent=' +
@@ -173,6 +174,15 @@ export async function acceptChallenge(nick) {
     '&opponent=' +
     nick +
     '&starting=true';
+}
+
+export async function removeFromChallenges(nick) {
+  const users_snapshot = await getDocs(collection(db, 'challenges'));
+  users_snapshot.forEach(async (doc) => {
+    if (doc.data().nick === nick) {
+      await deleteDoc(doc.ref);
+    }
+  });
 }
 
 export async function getPlayer(nick) {

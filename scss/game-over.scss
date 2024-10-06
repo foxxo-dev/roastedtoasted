@@ -1,0 +1,155 @@
+#gameOver {
+  background: var(--bg, #fff);
+  position: fixed;
+  z-index: 10000;
+  inset: 0;
+  padding: 1rem;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+#gameOver_canvas {
+  margin-top: 3rem;
+
+  width: 50rem;
+
+  margin-inline: auto;
+  outline: 5px solid var(--accent, purple);
+  padding: 1rem;
+
+  #gameOver_header {
+    width: 100%;
+    text-align: center;
+  }
+
+  .card {
+    background: var(--primary, yellow);
+    height: 10rem;
+    width: 100%;
+  }
+
+  #main_cards {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 1rem;
+    position: relative;
+
+    --vs_size: 5rem;
+
+    .card {
+      font-size: 4rem;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .card_background {
+        position: absolute;
+        font-size: 12rem;
+        transform: scaleX(-1);
+        opacity: 0.5;
+      }
+
+      .card_text {
+        position: absolute;
+      }
+    }
+
+    .card:nth-child(2) {
+      background: var(--secondary, blue);
+
+      .card_background {
+        left: -2rem;
+        bottom: -3.5rem;
+      }
+      .card_text {
+        right: 0.5rem;
+        bottom: 0rem;
+        text-align: right;
+      }
+      .vs {
+        color: white;
+        right: calc(-1 * var(--vs_size, 10rem) - 1rem);
+      }
+    }
+
+    .card:nth-child(3) {
+      background: var(--primary, yellow);
+
+      .card_background {
+        position: absolute;
+        right: -2rem;
+        bottom: -3.5rem;
+      }
+
+      .card_text {
+        left: 0.5rem;
+        bottom: 0rem;
+        text-align: right;
+      }
+      .vs {
+        color: white;
+        left: calc(-1 * var(--vs_size, 10rem) - 1rem);
+      }
+    }
+
+    .vs {
+      position: absolute;
+
+      letter-spacing: -0.25rem;
+
+      font-size: calc(1.5 * var(--vs_size, 10rem));
+      line-height: calc(1 * var(--vs_size, 10rem));
+      height: var(--vs_size, 10rem);
+      width: calc(2 * var(--vs_size, 10rem));
+    }
+
+    > .vs {
+      color: var(--accent, purple);
+    }
+  }
+
+  h2 {
+    font-size: 3rem;
+    span {
+      background: var(--accent, purple);
+      color: white;
+      padding-inline: 1rem;
+      height: 3rem;
+      position: relative;
+      --width: 0.5rem;
+
+      &::after,
+      &::before {
+        content: ' ';
+        display: inline-block;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      &::after {
+        border-width: 2rem var(--width, 1rem) 2rem var(--width, 1rem);
+        border-color: var(--accent, purple) transparent transparent
+          var(--accent, purple);
+        right: calc(-2 * var(--width, 1rem));
+      }
+
+      &::before {
+        border-width: 2rem var(--width, 1rem) 2rem var(--width, 1rem);
+        border-color: transparent var(--accent, purple) var(--accent, purple)
+          transparent;
+        left: calc(-2 * var(--width, 1rem));
+      }
+    }
+  }
+}

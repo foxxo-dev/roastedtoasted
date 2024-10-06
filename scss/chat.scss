@@ -6,6 +6,12 @@ body {
   grid-template-rows: 1fr;
 }
 
+#info-text {
+  font-size: 0.9rem;
+  opacity: 0.5;
+  margin-top: -0.5rem;
+}
+
 main {
   display: flex;
   flex-direction: column;
@@ -55,6 +61,101 @@ main {
   }
   button#sendButton {
     white-space: nowrap;
+    background-color: var(--primary, #fed790);
+
+    transform-origin: center;
+
+    transition: all 0.5s ease;
+
+    &:not(disabled) {
+    }
+    &:disabled {
+      background-color: rgb(173, 168, 165);
+      color: white;
+      cursor: not-allowed;
+    }
+    &:disabled:hover {
+      animation: shake 150ms linear;
+    }
+    animation: none;
+  }
+}
+
+#gameOver_chat {
+  display: flex;
+  width: 90%;
+  height: max-content;
+  gap: 2rem;
+  flex-direction: column;
+  gap: 2rem;
+  overflow-y: auto;
+  padding-inline: 0.5rem;
+  margin-bottom: 1rem;
+  .msg {
+    display: grid;
+    grid-template-columns: 1rem auto;
+    grid-template-rows: 1rem auto;
+    column-gap: 0.5rem;
+    row-gap: 0.25rem;
+
+    max-width: 80%;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+
+    position: relative;
+
+    .message_emoji {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .message_name {
+      font-weight: 500;
+      font-size: 0.8rem;
+      opacity: 0.6;
+
+      display: flex;
+      justify-content: row-start;
+      align-items: center;
+    }
+    .message_text {
+      font-size: 1.2rem;
+
+      grid-area: auto / auto / auto / span 2;
+    }
+  }
+  .msg.my_msg {
+    background: var(--primary, #fed790);
+    place-self: flex-end;
+  }
+  .msg.opponent_msg {
+    background: var(--secondary, #8bbfdf);
+    place-self: flex-start;
+  }
+  .msg::after {
+    content: '';
+    height: 0;
+    width: 0;
+
+    position: absolute;
+    bottom: -1.5rem;
+
+    border-width: 1rem;
+    border-style: solid;
+    border-radius: 0 0 1rem 1rem / 0 0 0.5rem 0.5rem;
+  }
+
+  .msg.my_msg::after {
+    border-color: var(--primary, #fed790) var(--primary, #fed790) transparent
+      transparent;
+    right: auto;
+    right: 0;
+  }
+  .msg.opponent_msg::after {
+    border-color: var(--secondary, #8bbfdf) transparent transparent
+      var(--secondary, #8bbfdf);
+    right: auto;
+    left: 0;
   }
 }
 
@@ -120,21 +221,40 @@ main {
 
       position: absolute;
       bottom: -1.5rem;
-      
+
       border-width: 1rem;
       border-style: solid;
       border-radius: 0 0 1rem 1rem / 0 0 0.5rem 0.5rem;
     }
 
     .msg.my_msg::after {
-      border-color: var(--primary, #fed790) var(--primary, #fed790) transparent transparent;
+      border-color: var(--primary, #fed790) var(--primary, #fed790) transparent
+        transparent;
       right: auto;
       right: 0;
     }
     .msg.opponent_msg::after {
-      border-color: var(--secondary, #8bbfdf) transparent transparent var(--secondary, #8bbfdf);
+      border-color: var(--secondary, #8bbfdf) transparent transparent
+        var(--secondary, #8bbfdf);
       right: auto;
       left: 0;
     }
+  }
+}
+
+#gameOver_canvas {
+  display: flex;
+  flex-direction: column;
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(1px, 0) rotate(-2deg);
+  }
+  50% {
+    transform: translate(-1px, 0) rotate(2deg);
+  }
+  100% {
+    transform: translate(0, 0) rotate(0deg);
   }
 }

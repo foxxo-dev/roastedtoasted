@@ -7,31 +7,72 @@
     <link rel="icon" href="../assets/ico.png" />
     <link rel="stylesheet" href="../scss/chat.scss" />
     <link rel="stylesheet" href="../scss/home.scss" />
+    <link rel="stylesheet" href="../scss/indev.scss" />
+    <link rel="stylesheet" href="../scss/game-over.scss" />
   </head>
   <body data-nick="loading">
-    <div id="loadingPopup" style="transition-delay: 0; opacity: 0;">
-      <div id="loadingPopupContent">
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <div id="loadingPopup">
+      `
+      <div
+        id="loadingPopupContent"
+        style="opacity: 1 !important; transition-delay: 5s !important">
         <h1>How to play:</h1>
         <p>
-          You are given 10 questions to use up, after both people use up 10
-          questions, your score is going to be calculated, by checking how many
-          common roasts you use. <br />
-          <br />
-          Example: Yo mama roasts = 2 points
+          Each person has 30 seconds to roast the other person. The person that
+          does not send their message in the 30 second time-frame given, will
+          lose the roast battle.
         </p>
       </div>
     </div>
     <main>
       <h1>🔥ROASTED TOASTED🍞</h1>
+      <p id="info-text">You start</p>
       <div id="chat">
-        <div id="chatMessages">
-        </div>
+        <div id="chatMessages"></div>
         <div id="chatForm">
-          <span class="msg_remaning" id="remaining">-- messages remaining</span>
-          <input
-            id="messageInput"
-            placeholder="Type your message here..." />
+          <span class="msg_remaning">
+            <span id="turn_remaining">starting:</span>
+            <span id="remaining">0:00</span>
+          </span>
+          <input id="messageInput" placeholder="Type your roast here..." />
           <button id="sendButton">Send</button>
+        </div>
+      </div>
+      <div id="gameOver">
+        <h1 id="gameOver_Message">Yay! You Won!</h1>
+        <br />
+        <h2>
+          You <span id="gameOver_wonlost">won</span> against
+          <span id="gameOver_enemy">your mom</span>!
+        </h2>
+
+        <button><a href="../choose/index.html">Play Again!</a></button>
+
+        <button id="save_chat_history">Save Chat History</button>
+
+        <div id="gameOver_canvas">
+          <div id="gameOver_header">
+            <h1>🔥ROASTED TOASTED🍞</h1>
+            <div id="gameOver_cards">
+              <div id="main_cards">
+                <span class="vs">VS</span>
+                <div class="card">
+                  <span class="vs">VS</span>
+                  <span class="card_background" id="bg_us">🦊</span>
+                  <span class="card_text" id="name_us">Foxxo</span>
+                </div>
+                <div class="card">
+                  <span class="vs">VS</span>
+                  <span class="card_background" id="bg_them">🦝</span>
+                  <span class="card_text" id="name_them">Nimo</span>
+                </div>
+              </div>
+            </div>
+            <h2>Total Messages: <span id="total_msg">00</span></h2>
+            <h2>Game Time: <span id="game_time">00:00</span></h2>
+          </div>
+          <div id="gameOver_chat"></div>
         </div>
       </div>
     </main>
