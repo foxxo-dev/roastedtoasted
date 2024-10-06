@@ -7,6 +7,9 @@ document.getElementById('loadingPopup').style.opacity = 0;
 
 var messages_log = new Array();
 
+var message_amount = 0;
+const game_time_start = new Date().getTime();
+
 starting == 'true'
   ? (document.getElementById('info-text').innerHTML = 'You start the battle.')
   : (document.getElementById('info-text').innerHTML =
@@ -20,34 +23,100 @@ let player_turn_time = 30000;
 var total_messages = 0;
 
 document.getElementById('gameOver_enemy').innerText = opponent;
-
+var __triggered = false;
 let enemyWin = () => {
   //while(true)
-  {
-    console.log('enemy win');
-    document.body.style.backgroundColor = 'red';
-    document.getElementById('gameOver').style.display = 'flex';
-    document.getElementById('gameOver_wonlost').innerText = 'lost';
-    document.getElementById('gameOver_Message').innerText =
-      'Uh oh, try again next time!';
+  console.log('user win');
 
-    document.getElementById('gameOver_enemy').innerText = opponent;
+  if (!__triggered) {
+    __triggered = true;
+    console.log('getting triggered');
+    const game_time = new Date().getTime() - game_time_start;
+    document.getElementById('gameOver_Message').innerText = 'Oops! You lost!';
     document.getElementById('total_msg').innerText = total_messages
       .toString()
       .padStart(2, '0');
 
-    let currentTimestamp = new Date().getTime();
-    document.getElementById('gameOver_time').innerText =
-      currentTimestamp - gameTimeStartTimestamp;
-  }
-};
+    let minutes = Math.floor(game_time / 60000);
+    let seconds = ((game_time % 60000) / 1000).toFixed(0);
+    document.getElementById('game_time').innerText = `${minutes}:${
+      seconds < 10 ? '0' : ''
+    }${seconds}`;
 
-let userWin = () => {
-  //while(true)
-  {
-    console.log('user win');
+    console.log(minutes, ':', seconds);
+
+    document.getElementById('name_us').innerText = nick;
+    document.getElementById('name_them').innerText = opponent;
+
+    document.getElementById('bg_them').innerText = enemy_emoji;
+    document.getElementById('bg_us').innerText = user_emoji;
 
     document.getElementById('gameOver').style.display = 'flex';
+
+    document.getElementById('gameOver_chat').innerHTML =
+      document.getElementById('chatMessages').innerHTML;
+
+    html2canvas(document.getElementById('gameOver_canvas')).then((canvas) => {
+      document.getElementById('gameOver_canvas').style.display = 'none';
+      let canvasElement = document.body.appendChild(canvas);
+      const dataURL = canvasElement.toDataURL('image/png');
+      const link = document.createElement('a');
+      link.href = dataURL;
+      link.download = 'gameStats.png';
+      console.log(link);
+      document
+        .getElementById('save_chat_history')
+        .addEventListener('click', () => {
+          link.click();
+        });
+    });
+  }
+};
+let userWin = () => {
+  console.log('user win');
+
+  if (!__triggered) {
+    __triggered = true;
+    console.log('getting triggered');
+    const game_time = new Date().getTime() - game_time_start;
+
+    document.getElementById('total_msg').innerText = total_messages
+      .toString()
+      .padStart(2, '0');
+
+    let minutes = Math.floor(game_time / 60000);
+    let seconds = ((game_time % 60000) / 1000).toFixed(0);
+    document.getElementById('game_time').innerText = `${minutes}:${
+      seconds < 10 ? '0' : ''
+    }${seconds}`;
+
+    console.log(minutes, ':', seconds);
+
+    document.getElementById('name_us').innerText = nick;
+    document.getElementById('name_them').innerText = opponent;
+
+    document.getElementById('bg_them').innerText = enemy_emoji;
+    document.getElementById('bg_us').innerText = user_emoji;
+
+    document.getElementById('gameOver').style.display = 'flex';
+
+    document.getElementById('gameOver_chat').innerHTML =
+      document.getElementById('chatMessages').innerHTML;
+
+    html2canvas(document.getElementById('gameOver_canvas')).then((canvas) => {
+      document.getElementById('gameOver_canvas').style.display = 'none';
+      let canvasElement = document.body.appendChild(canvas);
+      const dataURL = canvasElement.toDataURL('image/png');
+      const link = document.createElement('a');
+      link.href = dataURL;
+      link.download = 'gameStats.png';
+      console.log(link);
+      document
+        .getElementById('save_chat_history')
+        .addEventListener('click', () => {
+          link.click();
+        });
+    });
   }
 };
 
@@ -127,6 +196,7 @@ class Message {
     document.getElementById('chatMessages').appendChild(message_msg);
 
     total_messages++;
+    message_amount++;
   }
 }
 
@@ -215,7 +285,6 @@ const sending = async () => {
   enemyTurn();
 };
 
-var loopInterval;
 window.addEventListener('load', () => {
   if (starting == 'true' || starting == true) starting = true;
   else starting = false;
@@ -233,7 +302,7 @@ window.addEventListener('load', () => {
 
   loop();
 
-  loopInterval = setInterval(() => {
+  const loopInterval = setInterval(() => {
     loop();
   }, 5000); // 5sek
 

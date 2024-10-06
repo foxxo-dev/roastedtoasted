@@ -12,8 +12,11 @@
   </head>
   <body data-nick="loading">
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-    <div id="loadingPopup" style="display: none">
-      <div id="loadingPopupContent" style="opacity: 1; transition-delay: 5s">
+    <div id="loadingPopup">
+      `
+      <div
+        id="loadingPopupContent"
+        style="opacity: 1 !important; transition-delay: 5s !important">
         <h1>How to play:</h1>
         <p>
           Each person has 30 seconds to roast the other person. The person that
@@ -44,11 +47,11 @@
           <span id="gameOver_enemy">your mom</span>!
         </h2>
 
-        <button>Play Again!</button>
+        <button><a href="../choose/index.html">Play Again!</a></button>
 
         <button id="save_chat_history">Save Chat History</button>
 
-        <div id="gameOver_canvas" style="display: flex">
+        <div id="gameOver_canvas">
           <div id="gameOver_header">
             <h1>🔥ROASTED TOASTED🍞</h1>
             <div id="gameOver_cards">
@@ -56,18 +59,18 @@
                 <span class="vs">VS</span>
                 <div class="card">
                   <span class="vs">VS</span>
-                  <span class="card_background">🦊</span>
-                  <span class="card_text">Foxxo</span>
+                  <span class="card_background" id="bg_us">🦊</span>
+                  <span class="card_text" id="name_us">Foxxo</span>
                 </div>
                 <div class="card">
                   <span class="vs">VS</span>
-                  <span class="card_background">🦝</span>
-                  <span class="card_text">Nimo</span>
+                  <span class="card_background" id="bg_them">🦝</span>
+                  <span class="card_text" id="name_them">Nimo</span>
                 </div>
               </div>
             </div>
             <h2>Total Messages: <span id="total_msg">00</span></h2>
-            <h2>Game Time: <span id="total_msg">00:00</span></h2>
+            <h2>Game Time: <span id="game_time">00:00</span></h2>
           </div>
           <div id="gameOver_chat"></div>
         </div>

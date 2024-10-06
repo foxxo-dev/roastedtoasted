@@ -35,10 +35,20 @@ function createOpponentCard(user) {
     );
   } else {
     button.addEventListener('click', () => {
-      alert(
-        'You tried to outsmart the non-outsmartable! Imagine being that dumb.',
-      );
-      alert('Alerting all of your friends about being so dumb.');
+      fetch('https://api.ipify.org?format=json')
+        .then((response) => response.json())
+        .then((data) => {
+          alert(
+            'You tried to outsmart the non-outsmartable! Imagine being that dumb.',
+          );
+          alert(
+            'Alerting all of your friends about being so dumb. We know how to send this to them. This is your IP Adress: ' +
+              data.ip,
+          );
+        })
+        .catch((error) => {
+          console.log('Error:', error);
+        });
     });
 
     button.innerText = 'You';
