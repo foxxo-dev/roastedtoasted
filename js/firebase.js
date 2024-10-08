@@ -121,7 +121,7 @@ export async function challengeOpponent(nick, buttonDOM) {
   });
 
   setInterval(async () => {
-    const users_snapshot = await getDocs(collection(db, 'challenges'));
+    const users_snapshot = await getDocs(collection(db, 'online'));
     users_snapshot.forEach(async (doc) => {
       console.log('Checking if challenged', doc.data());
       if (doc.data().from === getSelf()) {
