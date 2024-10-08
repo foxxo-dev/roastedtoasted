@@ -91,11 +91,13 @@ export async function checkUser(nick) {
 
 export async function removeUser(nick) {
   const users_snapshot = await getDocs(collection(db, 'online'));
-  users_snapshot.forEach(async (doc) => {
+  const deletePromises = [];
+  users_snapshot.forEach((doc) => {
     if (doc.data().nick === nick) {
-      await deleteDoc(doc.ref);
+      deletePromises.push(deleteDoc(doc.ref));
     }
   });
+  await Promise.all(deletePromises);
 }
 
 // Challenge Opponent
@@ -124,7 +126,7 @@ export async function challengeOpponent(nick, buttonDOM) {
       console.log('Checking if challenged', doc.data());
       if (doc.data().from === getSelf()) {
         // remove the challenges document
-        await deleteDoc(doc.ref);
+        removeFromChallenges(doc.data().nick);
         window.location.href =
           '../chat/index.html?nick=' +
           getSelf() +
@@ -160,12 +162,12 @@ export async function acceptChallenge(nick) {
 
   await removeUser(document.body.dataset.nick);
 
-  await addDoc(collection(db, 'challenges'), {
-    nick: document.body.dataset.nick,
-    emoji: '',
-    status: 'accepted',
-    from: nick,
-  });
+  // await addDoc(collection(db, 'challenges'), {
+  //   nick: document.body.dataset.nick,
+  //   emoji: '',
+  //   status: 'accepted',
+  //   from: nick,
+  // });
   document.getElementById('challenges').innerHTML = '';
   document.getElementById('loadingPopup').style.opacity = 1;
   window.location.href =
@@ -178,11 +180,11 @@ export async function acceptChallenge(nick) {
 
 export async function removeFromChallenges(nick) {
   const users_snapshot = await getDocs(collection(db, 'challenges'));
-  users_snapshot.forEach(async (doc) => {
+  for (const doc of users_snapshot.docs) {
     if (doc.data().nick === nick) {
       await deleteDoc(doc.ref);
     }
-  });
+  }
 }
 
 export async function getPlayer(nick) {
