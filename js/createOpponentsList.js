@@ -42,7 +42,7 @@ function createOpponentCard(user) {
             'You tried to outsmart the non-outsmartable! Imagine being that dumb.',
           );
           alert(
-            'Alerting all of your friends about being so dumb. We know how to send this to them. This is your IP Adress: ' +
+            'Alerting all of your friends about being so dumb. We know how to send this to them. This is your IP Address: ' +
               data.ip,
           );
         })

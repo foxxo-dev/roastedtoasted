@@ -9,5 +9,19 @@ export function generateEmoji(text) {
     list_of_emoji_names.push(emoji.match.emoji.char);
   });
 
-  return list_of_emoji_names[0];
+  let final_emoji = list_of_emoji_names[0];
+
+  if (text.toLowerCase().includes('foxxo')) {
+    final_emoji = '🦊';
+  }
+
+  if (text.toLowerCase().includes('nimo')) {
+    final_emoji = '🦝';
+  }
+
+  if (text.toLowerCase().includes('john')) {
+    final_emoji = '🚽';
+  }
+
+  return final_emoji;
 }

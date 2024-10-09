@@ -132,14 +132,18 @@ let updateTimer = () => {
   )
     .toISOString()
     .substr(15, 4);
-
+  // Game over if after 3 seconds no new message has been sent.
   if (new Date() > gameOverTime) {
-    if (starting) {
-      document.getElementById('gameOver_wonlost').innerText = 'lost';
-      enemyWin();
-    } else {
-      userWin();
-    }
+    setTimeout(() => {
+      if (new Date() > gameOverTime) {
+        if (starting) {
+          document.getElementById('gameOver_wonlost').innerText = 'lost';
+          enemyWin();
+        } else {
+          userWin();
+        }
+      }
+    }, 3000);
   }
 };
 
