@@ -158,6 +158,21 @@ class Message {
   }
 
   async send() {
+    const new_content = this.content;
+    // sensor bad words from teh swears.json file
+    const response = await fetch('../assets/swears.json');
+    const swears_response = await response.json();
+
+    swears_response.forEach((swear) => {
+      if (new_content.includes(swear.orig)) {
+        new_content = new_content.replace(swear.orig, swear.edit);
+      }
+    });
+
+    if(new_content.includes("nigga") || new_content.includes("niger")){
+      new_content = '[Inappropriate Language]'
+    }
+
     await sendMsg_firebase(
       this.author,
       this.target,
