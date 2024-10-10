@@ -169,14 +169,19 @@ class Message {
       }
     });
 
-    if(new_content.includes("nigga") || new_content.includes("niger")){
-      new_content = '[Inappropriate Language]'
+    if (
+      new_content.includes('nigga') ||
+      new_content.includes('nigger') ||
+      new_content.includes('niga') ||
+      new_content.includes('niger')
+    ) {
+      new_content = '[Inappropriate Language]';
     }
 
     await sendMsg_firebase(
       this.author,
       this.target,
-      this.content,
+      new_content,
       this.timestamp,
       this.seen,
     );
